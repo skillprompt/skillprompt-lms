@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@skillprompt-lms-kysely": ["libs/lms-kysely/src/index.ts"],
       "@skillprompt-lms/libs/todo-feature": ["libs/todo-feature/src/index.ts"]
     }
   },
