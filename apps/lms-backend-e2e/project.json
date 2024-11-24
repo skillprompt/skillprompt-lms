@@ -1,0 +1,17 @@
+{
+  "name": "lms-backend-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "implicitDependencies": ["lms-backend"],
+  "targets": {
+    "e2e": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{e2eProjectRoot}"],
+      "options": {
+        "jestConfig": "apps/lms-backend-e2e/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "dependsOn": ["lms-backend:build"]
+    }
+  }
+}
