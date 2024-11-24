@@ -21,6 +21,7 @@
   - make documentations and teach everyone about jest
 - [ ] Clean code architecture folder structure for the backend
   - learn about entity, use cases, repository, infrastructure layers
+  - setup authentication in backend using auth.js library
 
 ## Frontend
 
@@ -28,6 +29,7 @@
 - [ ] set up react-query
 - [ ] set up zustand
 - [ ] setup nextui for component library
+- [ ] setup authentication in frontend when authentication is done in backend
 
 ## UI/UX Design
 
