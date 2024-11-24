@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@api-contract": ["libs/api-contract/src/index.ts"],
       "@skillprompt-lms/libs/todo-feature": ["libs/todo-feature/src/index.ts"]
     }
   },
