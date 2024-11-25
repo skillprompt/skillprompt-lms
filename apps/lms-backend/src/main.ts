@@ -5,13 +5,17 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { APIError } from './utils/error';
 import { env } from './utils/config';
-
+import compression from 'compression';
 
 const app = express();
 
 //----------------Helmet Setup --------------
 
 app.use(helmet());
+
+//-------------- Compression ---------------
+
+app.use(compression());
 
 // ------------------------- CORS Setup -------------------------
 app.use(
