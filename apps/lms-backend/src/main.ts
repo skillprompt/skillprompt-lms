@@ -35,7 +35,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiDocument));
 // ------------------------- CORS Setup -------------------------
 app.use(
   cors({
-    origin: ['http://your-frontend-url.com'], // replace with your actual frontend URL
+    origin: [`${env.FRONTEND_URI}`], // replace with your actual frontend URL
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // Support cookies
   })
