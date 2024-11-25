@@ -6,10 +6,9 @@ import cookieParser from 'cookie-parser';
 import { APIError } from './utils/error';
 import { env } from './utils/config';
 import compression from 'compression';
-import { generateOpenApi } from '@ts-rest/open-api';
-import * as swaggerUi from 'swagger-ui-express';
-
-import { apiContract } from '@api-contract';
+// import { generateOpenApi } from '@ts-rest/open-api';
+// import * as swaggerUi from 'swagger-ui-express';
+// import { apiContract } from '@api-contract';
 
 const app = express();
 
@@ -21,16 +20,16 @@ app.use(helmet());
 
 app.use(compression());
 
-//-------ts-rest with swagger----------
+// //-------ts-rest with swagger----------
 
-const openApiDocument = generateOpenApi(apiContract, {
-  info: {
-    title: 'Posts API',
-    version: '1.0.0',
-  },
-});
+// const openApiDocument = generateOpenApi(apiContract, {
+//   info: {
+//     title: 'Posts API',
+//     version: '1.0.0',
+//   },
+// });
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiDocument));
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiDocument));
 
 // ------------------------- CORS Setup -------------------------
 app.use(
