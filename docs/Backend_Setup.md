@@ -11,8 +11,10 @@ This repository serves as the backend for your application, built using **Node.j
 - [**Installation**](#installation)
   - [Quick Setup](#quick-setup)
   - [Package Installation Guide](#package-installation-guide)
-  - [Database Setup](#database-setup)
-  - [Environment Setup](#environment-setup)
+- [API Setup](#api-setup)
+- [VS-Code Extension](#vs-code-extension)
+- [Database Setup](#database-setup)
+- [Environment Setup](#environment-setup)
 - [**Technologies Used**](#technologies-used)
 
 ---
@@ -77,6 +79,13 @@ yarn add --dev @types/express @types/node @types/bcryptjs @types/jsonwebtoken @t
 
 ```
 
+<h1>OR</h1>
+<h1>You can just type Yarn Install in your terminal after you clone or just pull all dependencies will automatically addded to your package.json file</h1>
+
+```bash
+yarn install
+```
+
 ### **Optional Security Packages**
 
 yarn add nodemailer [Nodemailer Docs](https://classic.yarnpkg.com/en/package/nodemailer)
@@ -84,6 +93,8 @@ yarn add nodemailer [Nodemailer Docs](https://classic.yarnpkg.com/en/package/nod
 ---
 
 ### <h1>Database Setup</h1>
+
+<p>Choose/Install packages Which DataBase You needed</p>
 
 #### **MongoDB Setup**
 
@@ -115,7 +126,20 @@ yarn add mysql
 
 ---
 
-### **VS-Code Extension**
+---
+
+### **API Setup**
+
+<p>Api is setup by sing ts-rest with swaggerui. To use it first download some dependencies</p>
+
+```bash
+yarn add @ts-rest/open-api swagger-ui-express @ts-rest/core
+
+```
+
+---
+
+### **VS Code Extension**
 
 ---
 
