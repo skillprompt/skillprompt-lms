@@ -160,8 +160,10 @@ Create a `.env` file in the root directory and add the following:
 ```env
 NODE_ENV=development
 PORT=4000
-DATABASE_URL=your_database_url_here
+# Database_URI = Database_URI
+FRONTEND_URL = Frontend_URI
 JWT_SECRET=random_secret_value
+
 ```
 
 ---
@@ -178,7 +180,7 @@ yarn start
 
 ---
 
-## **Technologies Used**
+## **Neccessary Technologies Docs Used in Backend**
 
 | Technology             | Description                                                                                                                                                                                                | Documentation                                                                        |
 | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
