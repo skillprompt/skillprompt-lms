@@ -1,9 +1,26 @@
+import { Course } from './Course';
+import { Home } from './Home';
 import NxWelcome from './nx-welcome';
 import { Link, Route, Routes } from 'react-router';
 import { Button, NextUIProvider } from '@nextui-org/react';
 import Counter from './counter';
-
+import {
+  Link,
+  createBrowserRouter,
+  RouterProvider,
+  NavLink,
+} from 'react-router-dom';
 export function App() {
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Home />,
+    },
+    {
+      path: '/page-2',
+      element: <Course />,
+    },
+  ]);
   return (
     <div>
       <NxWelcome title="lms-frontend" />
@@ -15,10 +32,10 @@ export function App() {
       <div role="navigation">
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <NavLink to="/">Home</NavLink>
           </li>
           <li>
-            <Link to="/page-2">Page 2</Link>
+            <NavLink to="/page-2">Page 2</NavLink>
           </li>
           <li>
             <Link to="/counter">Counter</Link>{' '}
@@ -50,6 +67,7 @@ export function App() {
           <Button color="primary">Click Me</Button>
         </div>
       </NextUIProvider>
+      <RouterProvider router={router} />
     </div>
   );
 }
