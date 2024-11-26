@@ -66,7 +66,7 @@ As a first step, create a project directory :
 
 **Initialize TS project and add the Prisma Client as a development dependency:**
 
-For Node.js:
+For NPM:
 
 ```npm init -y```
 ```npm install prisma typescript tsx @types/node --save-dev```
@@ -81,7 +81,7 @@ For Yarn:
 
 **Install Prisma ClI**
 
-For node.js
+For NPM:
 ```npx prisma```
 
 For Yarn:
@@ -89,7 +89,7 @@ For Yarn:
 
 **setup Prisma Schema File**
 
-For Node.js:
+For NPM:
 ```npx prisma init```
 
 For Yarn:
@@ -148,7 +148,7 @@ Caution: It can overwrite data if your schema changes affect existing tables or 
 
 ## 4.Install Prisma Client
 
-For Node.js
+For NPM:
 ``npm install @prisma/client``
 
 For Yarn:
