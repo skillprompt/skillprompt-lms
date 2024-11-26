@@ -1,644 +1,327 @@
-# Clean Code Architecture
 
-Clean Code Architecture, also known as Clean Architecture, is a software design approach proposed by Robert C. Martin (Uncle Bob). This philosophy emphasizes the separation of concerns and independence of different layers in a system, making it easier to modify and extend software over time. Its main goal is to produce maintainable, scalable, and testable software systems.
+# Clean Code Architecture for E-Commerce Backend
 
-![1_gNMlCdPkghf_2F8v3MGtqA](https://github.com/user-attachments/assets/ad0ad8ad-7781-4ff2-843c-d08c4010d652)
+## Overview of Clean Code Architecture
 
----
+Clean Code Architecture, also known as Clean Architecture, is a software design approach proposed by Robert C. Martin (Uncle Bob). It emphasizes the separation of concerns and the independence of different layers in a system, making it easier to modify and extend the software over time. The main goal is to produce maintainable, scalable, and testable software systems.
 
-## Key Principles of Clean Code Architecture:
+![Clean Code Architecture](https://github.com/user-attachments/assets/ae18b2a2-7923-498d-a80f-1e0035f17ce6)
 
-1. **Separation of Concerns**  
-   The system is divided into layers or rings, each with a specific responsibility. This reduces coupling between different parts of the system.
 
-2. **Dependency Rule**  
-   Dependencies should always point inward, meaning inner layers should not depend on outer layers. This ensures that core business logic is insulated from external concerns like databases, UI, or frameworks.
 
-3. **Independence**
+### Layers of Clean Architecture:
 
-   - **Framework Independence:** The architecture does not depend on any specific framework, making it easier to swap frameworks without significant changes.
-   - **UI Independence:** The core logic is separate from the user interface, allowing for multiple interfaces to be used without affecting the core.
-   - **Database Independence:** The business logic is not tied to a specific database, enabling changes to data storage solutions without altering the core.
+1. **Domain Layer**
+    - The innermost layer of the architecture, containing core business logic and entities of the application. This layer represents the heart of the application and is where business rules are defined.
+   
+2. **Application Layer**
+    - Acts as an intermediary between the Domain Layer and Presentation Layer. It contains application-specific use cases and orchestrates the flow of data between the Domain Layer and external interfaces.
+   
+3. **Presentation Layer**
+    - Responsible for handling user interactions and displaying information to the user. It interacts with the Application Layer to fetch necessary data and present it to the user.
+   
+4. **Data Layer**
+    - Handles data access and storage. It includes database interactions or any mechanism used to retrieve and persist data. This layer communicates with the Application Layer to fetch or store data based on the application’s requirements.
 
-4. **Testability**  
-   By isolating business rules, Clean Architecture makes it easier to write unit tests, as the core logic is decoupled from external dependencies.
+### Key Benefits:
+- **Modularity**: Components can be developed, tested, and replaced independently.
+- **Testability**: Layers can be tested independently using unit tests or integration tests.
+- **Maintainability**: Changes to one layer (e.g., replacing a database) do not affect other layers.
+  
 
-5. **Flexibility and Maintainability**  
-   Organizing the code into layers enables easier adaptation to changes and reduces maintenance overhead.
 
----
+Here is the file structure you requested in a `.md` format:
 
-## Layers in Clean Code Architecture
+```markdown
+# E-commerce Backend Clean Code Architecture
 
-1. **Entities (Core Business Rules):**
+## File Structure
 
-   - Represent the core data and behavior of the system.
-   - Independent of any external framework, database, or UI.
-   - Should change only if business logic changes.
-
-2. **Use Cases (Application Business Rules):**
-
-   - Contain the specific rules for how the application interacts with entities.
-   - Coordinate user actions and ensure proper execution of business logic.
-   - Independent of the interface and infrastructure.
-
-3. **Interface Adapters:**
-
-   - Bridge the use cases and the external world (UI, databases, APIs, etc.).
-   - Convert data to and from formats usable by the core application.
-
-4. **Frameworks and Drivers:**
-   - Represent external tools and frameworks used by the application (e.g., web frameworks, databases, external APIs).
-   - This layer is the most susceptible to change, so it is kept at the outermost level to minimize its impact on the core logic.
-
----
-
-## Alternative Layer Organization
-
-### Data Layer
-
-Handles data from external sources, such as databases or web services.
-
-- **Data Sources:** Classes responsible for fetching data from various sources (e.g., REST APIs, local storage).
-- **Models:** Defines the data models used throughout the application.
-- **Repository:** Acts as an abstraction layer over data sources, providing a clean API for accessing and managing data.
-
-### Domain Layer
-
-Contains the core business logic and rules of the application.
-
-- **Entities:** Core business objects with properties and behaviors.
-- **Use Cases:** Application-specific business rules, orchestrating interactions between entities and data sources.
-- **Repository Interfaces:** Interfaces for repositories, decoupling the domain layer from specific data sources.
-
-### Presentation Layer
-
-Handles user interface logic and interactions.
-
-- **BLoC (Business Logic Component):** Manages the application’s state and business logic.
-- **Pages:** Represents individual screens or views.
-- **Widgets:** Reusable UI components across screens.
-- **UI Controllers:** Handle user inputs and events, coordinating with BLoCs to update the UI.
-
----
-
-## Advantages of Clean Code Architecture
-
-- **Maintainability:** Changes to one part of the system have minimal impact on others.
-- **Scalability:** Well-defined layers make it easier to extend functionality.
-- **Testability:** Decoupling simplifies writing and running automated tests.
-- **Framework Independence:** Flexibility in choosing or switching frameworks and technologies.
-
----
-
-## Example: Task Management System in Express.js
-
-### Project Structure
-
-```
-src/
-├── entities/
-│   └── Task.js
-├── usecases/
-│   ├── CreateTask.js
-│   ├── GetTasks.js
-│   └── ToggleTaskStatus.js
-├── controllers/
-│   └── TaskController.js
-├── repositories/
-│   └── TaskRepository.js
-├── frameworks/
-│   └── db.js
-├── routes/
-│   └── taskRoutes.js
-├── app.js
-└── server.js
+``` bash
+ecommerce-backend/
+├── src/
+│   ├── config/                   # Configuration files
+│   │   ├── database.js           # Database connection setup
+│   │   └── env.js                # Environment variables handler
+│   ├── data/                     # Data Layer
+│   │   ├── models/               # Database models
+│   │   │   ├── ProductModel.js   # Product schema/model
+│   │   │   ├── UserModel.js      # User schema/model
+│   │   │   └── CartModel.js      # Cart schema/model
+│   │   └── repositories/         # Repositories (data access logic)
+│   │       ├── ProductRepository.js
+│   │       ├── UserRepository.js
+│   │       └── CartRepository.js
+│   ├── domain/                   # Domain Layer
+│   │   ├── entities/             # Core business entities
+│   │   │   ├── Product.js        # Product entity
+│   │   │   ├── User.js           # User entity
+│   │   │   └── Cart.js           # Cart entity
+│   │   └── services/             # Business logic services
+│   │       ├── InventoryService.js # Handles inventory-related logic
+│   │       └── PaymentService.js   # Handles payment-related logic
+│   ├── application/              # Application Layer
+│   │   └── usecases/             # Application-specific workflows
+│   │       ├── AddToCart.js      # Adds an item to the cart
+│   │       ├── PlaceOrder.js     # Places an order
+│   │       └── RegisterUser.js   # Registers a new user
+│   ├── presentation/             # Presentation Layer
+│   │   ├── controllers/          # Handles HTTP requests
+│   │   │   ├── CartController.js # Manages cart operations
+│   │   │   ├── ProductController.js # Manages product operations
+│   │   │   └── UserController.js # Manages user operations
+│   │   ├── middleware/           # Middleware for validation, auth, etc.
+│   │   │   ├── authMiddleware.js # Auth-related middleware
+│   │   │   ├── validateRequest.js # Request validation middleware
+│   │   └── routes/               # API route definitions
+│   │       ├── CartRoutes.js     # Routes for cart operations
+│   │       ├── ProductRoutes.js  # Routes for product operations
+│   │       └── UserRoutes.js     # Routes for user operations
+│   ├── utils/                    # Utility functions
+│   │   ├── errorHandler.js       # Error handling utilities
+│   │   └── logger.js             # Logging utilities
+│   └── index.js                  # Application entry point
+├── tests/                        # Automated tests
+│   ├── unit/                     # Unit tests
+│   ├── integration/              # Integration tests
+├── .env                          # Environment variables
+├── package.json                  # Project metadata and dependencies
+└── README.md                     # Documentation
 ```
 
-### Code Snippets
+---
 
-1. **Entities**
+## Detailed Explanation of File Structure
 
-   ```javascript
-   // src/entities/Task.js
-   class Task {
-     constructor(id, title, isCompleted = false) {
-       this.id = id;
-       this.title = title;
-       this.isCompleted = isCompleted;
-     }
+### 1. `src/config/` - Configuration Files
 
-     markAsCompleted() {
-       this.isCompleted = true;
-     }
+This folder contains all the configuration files required for the application to work, such as connecting to the database or loading environment variables.
 
-     markAsPending() {
-       this.isCompleted = false;
-     }
-   }
+**Files in `src/config/`:**
+- `database.js`: Handles database connection setup, like connecting to MongoDB using Mongoose.
 
-   module.exports = Task;
-   ```
+```js
+const mongoose = require('mongoose');
 
-2. **Use Cases**  
-   **Create Task:**
+const connectDB = async () => {
+    try {
+        await mongoose.connect(process.env.MONGO_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        console.log('Database connected');
+    } catch (err) {
+        console.error('Database connection error:', err.message);
+        process.exit(1);
+    }
+};
 
-   ```javascript
-   // src/usecases/CreateTask.js
-   module.exports = class CreateTask {
-     constructor(taskRepository) {
-       this.taskRepository = taskRepository;
-     }
+module.exports = connectDB;
+```
 
-     async execute(taskData) {
-       const newTask = await this.taskRepository.create(taskData);
-       return newTask;
-     }
-   };
-   ```
+- `env.js`: Centralizes access to environment variables for easier maintainability.
 
-   **Get Tasks:**
+```js
+const dotenv = require('dotenv');
+dotenv.config();
 
-   ```javascript
-   // src/usecases/GetTasks.js
-   module.exports = class GetTasks {
-     constructor(taskRepository) {
-       this.taskRepository = taskRepository;
-     }
-
-     async execute(filter = {}) {
-       return await this.taskRepository.getAll(filter);
-     }
-   };
-   ```
-
-   **Toggle Task Status:**
-
-   ```javascript
-   // src/usecases/ToggleTaskStatus.js
-   module.exports = class ToggleTaskStatus {
-     constructor(taskRepository) {
-       this.taskRepository = taskRepository;
-     }
-
-     async execute(taskId) {
-       const task = await this.taskRepository.getById(taskId);
-       if (!task) throw new Error('Task not found');
-
-       if (task.isCompleted) {
-         task.markAsPending();
-       } else {
-         task.markAsCompleted();
-       }
-
-       return await this.taskRepository.update(taskId, task);
-     }
-   };
-   ```
-
-3. **Repository**
-
-   ```javascript
-   // src/repositories/TaskRepository.js
-   class TaskRepository {
-     constructor(database) {
-       this.database = database;
-       this.tasks = database.tasks || [];
-     }
-
-     async create(taskData) {
-       const id = this.tasks.length + 1;
-       const task = { id, ...taskData, isCompleted: false };
-       this.tasks.push(task);
-       return task;
-     }
-
-     async getAll(filter) {
-       return this.tasks.filter((task) => {
-         if (filter.isCompleted !== undefined) {
-           return task.isCompleted === filter.isCompleted;
-         }
-         return true;
-       });
-     }
-
-     async getById(id) {
-       return this.tasks.find((task) => task.id === id);
-     }
-
-     async update(id, updatedTask) {
-       const index = this.tasks.findIndex((task) => task.id === id);
-       if (index === -1) return null;
-       this.tasks[index] = updatedTask;
-       return updatedTask;
-     }
-   }
-
-   module.exports = TaskRepository;
-   ```
-
-4. **Controllers**
-
-   ```javascript
-   // src/controllers/TaskController.js
-   module.exports = class TaskController {
-     constructor({ createTask, getTasks, toggleTaskStatus }) {
-       this.createTask = createTask;
-       this.getTasks = getTasks;
-       this.toggleTaskStatus = toggleTaskStatus;
-     }
-
-     async create(req, res) {
-       try {
-         const task = await this.createTask.execute(req.body);
-         res.status(201).json(task);
-       } catch (error) {
-         res.status(500).json({ error: error.message });
-       }
-     }
-
-     async getAll(req, res) {
-       try {
-         const tasks = await this.getTasks.execute(req.query);
-         res.json(tasks);
-       } catch (error) {
-         res.status(500).json({ error: error.message });
-       }
-     }
-
-     async toggleStatus(req, res) {
-       try {
-         const task = await this.toggleTaskStatus.execute(parseInt(req.params.id, 10));
-         res.json(task);
-       } catch (error) {
-         res.status(404).json({ error: error.message });
-       }
-     }
-   };
-   ```
-
-5. **Routes**
-
-   ```javascript
-   // src/routes/taskRoutes.js
-   const express = require('express');
-   const TaskController = require('../controllers/TaskController');
-   const TaskRepository = require('../repositories/TaskRepository');
-   const CreateTask = require('../usecases/CreateTask');
-   const GetTasks = require('../usecases/GetTasks');
-   const ToggleTaskStatus = require('../usecases/ToggleTaskStatus');
-   const db = require('../frameworks/db');
-
-   const router = express.Router();
-
-   const taskRepository = new TaskRepository(db);
-   const taskController = new TaskController({
-     createTask: new CreateTask(taskRepository),
-     getTasks: new GetTasks(taskRepository),
-     toggleTaskStatus: new ToggleTaskStatus(taskRepository),
-   });
-
-   router.post('/tasks', (req, res) => taskController.create(req, res));
-   router.get('/tasks', (req, res) => taskController.getAll(req, res));
-   router.patch('/tasks/:id/toggle', (req, res) => taskController.toggleStatus(req, res));
-
-   module.exports = router;
-   ```
-
-6. **Frameworks (DataBase)**
-
-```javascript
-// src/frameworks/db.js
 module.exports = {
-  tasks: [], // In-memory data storage for simplicity
+    MONGO_URI: process.env.MONGO_URI,
+    PORT: process.env.PORT || 5000,
 };
-```
-
-7. **Application Initialization**
-
-This section sets up the **Express.js** application and integrates the routes for the API.
-
-#### Code Implementation: `src/app.js`
-
-```javascript
-const express = require('express');
-const taskRoutes = require('./routes/taskRoutes');
-
-const app = express();
-
-// Middleware for parsing JSON requests
-app.use(express.json());
-
-// Route configuration
-app.use('/api', taskRoutes);
-
-module.exports = app;
 ```
 
 ---
 
-8. **Server Setup**
+### 2. `src/data/` - Data Layer
 
-This section starts the server and listens on the specified port.
+The Data Layer handles communication with the database and external services.
 
-#### Code Implementation: `src/server.js`
+#### `models/` - Database Models
+Defines database schemas using Mongoose, Sequelize, or any ORM. Each model represents a table/collection in the database.
 
-```javascript
-const app = require('./app');
+**Example: `ProductModel.js`**
+```js
+const mongoose = require('mongoose');
 
-// Default port or environment variable
-const PORT = process.env.PORT || 3000;
-
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+const productSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    price: { type: Number, required: true },
+    stock: { type: Number, required: true },
 });
+
+module.exports = mongoose.model('Product', productSchema);
+```
+
+#### `repositories/` - Repositories
+Repositories abstract database interactions, making the code more testable and clean. They encapsulate CRUD operations.
+
+**Example: `ProductRepository.js`**
+```js
+const Product = require('../models/ProductModel');
+
+const getProductById = async (id) => Product.findById(id);
+const updateStock = async (id, quantity) =>
+    Product.findByIdAndUpdate(id, { $inc: { stock: -quantity } });
+
+module.exports = { getProductById, updateStock };
 ```
 
 ---
 
-## Project Structure
+### 3. `src/domain/` - Domain Layer
 
-```
-src/
-├── entities/
-│   └── Book.js
-├── usecases/
-│   ├── AddBook.js
-│   ├── BorrowBook.js
-│   └── ListBooks.js
-├── controllers/
-│   └── BookController.js
-├── repositories/
-│   └── BookRepository.js
-├── frameworks/
-│   └── db.js
-├── routes/
-│   └── bookRoutes.js
-├── app.js
-└── server.js
-```
+The Domain Layer is where the core business logic and rules of the application live. It contains the entities and services needed for the system to function.
 
----
+#### `entities/` - Core Business Entities
+Defines core objects and their behaviors. These are plain JavaScript classes, not tied to any framework.
 
-## Code Implementation
-
-### 1. **Entities (Core Business Rules)**
-
-**Entity: Book**  
-Encapsulates business rules for books.
-
-```javascript
-// src/entities/Book.js
-class Book {
-  constructor(id, title, author, isBorrowed = false) {
-    this.id = id;
-    this.title = title;
-    this.author = author;
-    this.isBorrowed = isBorrowed;
-  }
-
-  borrow() {
-    if (this.isBorrowed) {
-      throw new Error('Book is already borrowed');
+**Example: `Cart.js`**
+```js
+class Cart {
+    constructor(userId) {
+        this.userId = userId;
+        this.items = [];
     }
-    this.isBorrowed = true;
-  }
 
-  returnBook() {
-    if (!this.isBorrowed) {
-      throw new Error('Book is not borrowed');
+    addItem(product, quantity) {
+        if (quantity > product.stock) {
+            throw new Error('Not enough stock available');
+        }
+        const itemIndex = this.items.findIndex(item => item.productId === product.id);
+        if (itemIndex !== -1) {
+            this.items[itemIndex].quantity += quantity;
+        } else {
+            this.items.push({
+                productId: product.id,
+                name: product.name,
+                price: product.price,
+                quantity,
+            });
+        }
     }
-    this.isBorrowed = false;
-  }
 }
 
-module.exports = Book;
+module.exports = Cart;
 ```
 
----
+#### `services/` - Business Logic Services
+Implements business logic that doesn’t fit into entities.
 
-### 2. **Use Cases (Application Business Rules)**
+**Example: `InventoryService.js`**
+```js
+const { getProductById } = require('../data/repositories/ProductRepository');
 
-These handle specific business operations.
-
-#### Add Book Use Case
-
-```javascript
-// src/usecases/AddBook.js
-module.exports = class AddBook {
-  constructor(bookRepository) {
-    this.bookRepository = bookRepository;
-  }
-
-  async execute(bookData) {
-    const book = await this.bookRepository.add(bookData);
-    return book;
-  }
-};
-```
-
-#### Borrow Book Use Case
-
-```javascript
-// src/usecases/BorrowBook.js
-module.exports = class BorrowBook {
-  constructor(bookRepository) {
-    this.bookRepository = bookRepository;
-  }
-
-  async execute(bookId) {
-    const book = await this.bookRepository.getById(bookId);
-    if (!book) throw new Error('Book not found');
-
-    book.borrow();
-    await this.bookRepository.update(bookId, book);
-    return book;
-  }
-};
-```
-
-#### List Books Use Case
-
-```javascript
-// src/usecases/ListBooks.js
-module.exports = class ListBooks {
-  constructor(bookRepository) {
-    this.bookRepository = bookRepository;
-  }
-
-  async execute() {
-    return await this.bookRepository.getAll();
-  }
-};
-```
-
----
-
-### 3. **Repository (Abstraction for Data Access)**
-
-Handles database interactions.
-
-```javascript
-// src/repositories/BookRepository.js
-const Book = require('../entities/Book');
-
-class BookRepository {
-  constructor(database) {
-    this.database = database;
-    this.books = database.books || [];
-  }
-
-  async add(bookData) {
-    const id = this.books.length + 1;
-    const book = new Book(id, bookData.title, bookData.author);
-    this.books.push(book);
-    return book;
-  }
-
-  async getAll() {
-    return this.books;
-  }
-
-  async getById(id) {
-    return this.books.find((book) => book.id === id);
-  }
-
-  async update(id, updatedBook) {
-    const index = this.books.findIndex((book) => book.id === id);
-    if (index === -1) return null;
-    this.books[index] = updatedBook;
-    return updatedBook;
-  }
-}
-
-module.exports = BookRepository;
-```
-
----
-
-### 4. **Controllers (Interface Adapters)**
-
-Manages HTTP requests and responses.
-
-```javascript
-// src/controllers/BookController.js
-module.exports = class BookController {
-  constructor({ addBook, borrowBook, listBooks }) {
-    this.addBook = addBook;
-    this.borrowBook = borrowBook;
-    this.listBooks = listBooks;
-  }
-
-  async add(req, res) {
-    try {
-      const book = await this.addBook.execute(req.body);
-      res.status(201).json(book);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
+const checkStock = async (productId, quantity) => {
+    const product = await getProductById(productId);
+    if (!product || product.stock < quantity) {
+        throw new Error('Insufficient stock');
     }
-  }
-
-  async borrow(req, res) {
-    try {
-      const book = await this.borrowBook.execute(parseInt(req.params.id, 10));
-      res.json(book);
-    } catch (error) {
-      res.status(400).json({ error: error.message });
-    }
-  }
-
-  async list(req, res) {
-    try {
-      const books = await this.listBooks.execute();
-      res.json(books);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  }
+    return true;
 };
+
+module.exports = { checkStock };
 ```
 
 ---
 
-### 5. **Routes**
+### 4. `src/application/` - Application Layer
 
-Defines API endpoints and their handlers.
+The Application Layer orchestrates workflows (use cases). It coordinates between the domain layer and data layer to fulfill specific operations.
 
-```javascript
-// src/routes/bookRoutes.js
+#### `usecases/` - Application-Specific Workflows
+Implements high-level application workflows like "Add an item to the cart" or "Place an order."
+
+**Example: `AddToCart.js`**
+```js
+const { getProductById } = require('../../data/repositories/ProductRepository');
+const { updateCart } = require('../../data/repositories/CartRepository');
+const Cart = require('../../domain/entities/Cart');
+
+const addToCart = async (userId, productId, quantity) => {
+    const product = await getProductById(productId);
+    if (!product) throw new Error('Product not found');
+    
+    const cart = new Cart(userId); // Create or retrieve user's cart
+    cart.addItem(product, quantity); // Add the product to the cart
+    
+    await updateCart(userId, cart); // Save cart in the repository
+    return cart; // Return updated cart
+};
+
+module.exports = { addToCart };
+```
+
+---
+
+### 5. `src/presentation/` - Presentation Layer
+
+The Presentation Layer handles communication with the client, such as HTTP requests and responses. It includes routes, controllers, and middleware.
+
+#### `routes/` - API Route Definitions
+Defines the API endpoints and maps them to controllers.
+
+**Example: `CartRoutes.js`**
+```js
 const express = require('express');
-const BookController = require('../controllers/BookController');
-const BookRepository = require('../repositories/BookRepository');
-const AddBook = require('../usecases/AddBook');
-const BorrowBook = require('../usecases/BorrowBook');
-const ListBooks = require('../usecases/ListBooks');
-const db = require('../frameworks/db');
-
+const { addItemToCart } = require('../controllers/CartController');
 const router = express.Router();
 
-// Dependency Injection
-const bookRepository = new BookRepository(db);
-const bookController = new BookController({
-  addBook: new AddBook(bookRepository),
-  borrowBook: new BorrowBook(bookRepository),
-  listBooks: new ListBooks(bookRepository),
-});
-
-// Routes
-router.post('/books', (req, res) => bookController.add(req, res));
-router.patch('/books/:id/borrow', (req, res) => bookController.borrow(req, res));
-router.get('/books', (req, res) => bookController.list(req, res));
+router.post('/cart/add', addItemToCart); // Map route to controller action
 
 module.exports = router;
 ```
 
----
+#### `controllers/` - Handle HTTP Requests
+Receives HTTP requests, validates input, and calls the appropriate use case.
 
-### 6. **Frameworks (Database)**
+**Example: `CartController.js`**
+```js
+const { addToCart } = require('../../application/usecases/AddToCart');
 
-Implements an in-memory database.
-
-```javascript
-// src/frameworks/db.js
-module.exports = {
-  books: [],
+const addItemToCart = async (req, res) => {
+    try {
+        const { userId, productId, quantity } = req.body;
+        const updatedCart = await addToCart(userId, productId, quantity);
+        res.status(200).json(updatedCart);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
 };
+
+module.exports = { addItemToCart };
 ```
+
+#### `
+
+middleware/` - Middleware for Validation, Authentication, etc.
 
 ---
 
-### 7. **Application Initialization**
+### 6. `tests/` - Automated Tests
 
-Initializes Express.js and sets up middleware.
-
-```javascript
-// src/app.js
-const express = require('express');
-const bookRoutes = require('./routes/bookRoutes');
-
-const app = express();
-app.use(express.json());
-app.use('/api', bookRoutes);
-
-module.exports = app;
-```
+Organized into:
+- **Unit Tests**: For individual components like Cart or ProductRepository.
+- **Integration Tests**: Tests workflows across layers.
 
 ---
 
-### 8. **Server Setup**
+## Code Flow Example: Add to Cart
 
-Starts the server.
-
-```javascript
-// src/server.js
-const app = require('./app');
-
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
-```
+1. The route receives the request and sends it to the controller.
+2. The controller calls the `AddToCart` use case.
+3. The use case retrieves product data using `ProductRepository`.
+4. The domain entity (`Cart`) processes business logic.
+5. `CartRepository` saves changes to the database.
+6. The response is returned to the client.
 
 ---
+
+## Benefits of this Structure:
+- **Separation of Concerns**: Each layer handles its responsibility.
+- **Scalability**: Easy to add features or layers.
+- **Testability**: Layers can be independently tested.
+```
+
+This file structure is designed to keep each part of the system isolated, which increases maintainability and testability.
+
