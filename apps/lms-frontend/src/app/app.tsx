@@ -1,6 +1,7 @@
 import NxWelcome from './nx-welcome';
-
-import { Route, Routes, Link } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router';
+import { Button, NextUIProvider } from '@nextui-org/react';
+import Counter from './counter';
 
 export function App() {
   return (
@@ -8,8 +9,6 @@ export function App() {
       <NxWelcome title="lms-frontend" />
 
       {/* START: routes */}
-      {/* These routes and navigation have been generated for you */}
-      {/* Feel free to move and update them to fit your needs */}
       <br />
       <hr />
       <br />
@@ -20,6 +19,9 @@ export function App() {
           </li>
           <li>
             <Link to="/page-2">Page 2</Link>
+          </li>
+          <li>
+            <Link to="/counter">Counter</Link>{' '}
           </li>
         </ul>
       </div>
@@ -41,8 +43,13 @@ export function App() {
             </div>
           }
         />
+        <Route path="/counter" element={<Counter />} />{' '}
       </Routes>
-      {/* END: routes */}
+      <NextUIProvider>
+        <div>
+          <Button color="primary">Click Me</Button>
+        </div>
+      </NextUIProvider>
     </div>
   );
 }
