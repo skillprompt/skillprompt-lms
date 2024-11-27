@@ -77,3 +77,24 @@ import Counter from './Counter';
 ```
 
 - Adding a route for the Counter component.
+
+# NextUI Setup
+
+NextUI is a modern and customizable React-based UI library designed to help developers create beautiful, fast, and responsive user interfaces effortlessly.
+
+# Installation
+
+```sh
+npm install @nextui-org/react framer-motion
+```
+This install the NextUI to the project.
+
+```sh
+const { nextui } = require('@nextui-org/react');
+```
+This imports the NextUI configuration, which might be used later in your setup for theme customization or plugin integration with TailwindCSS.
+
+```sh
+import {NextUIProvider} from "@nextui-org/react";
+```
+The NextUIProvider is a core component provided by the @nextui-org/react library. Its primary function is to act as a context provider that wraps your application and supplies global theming, styles, and configuration for all NextUI components.
