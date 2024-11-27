@@ -1,0 +1,19 @@
+{
+  "name": "lms-kysely",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/lms-kysely/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/lms-kysely",
+        "main": "libs/lms-kysely/src/index.ts",
+        "tsConfig": "libs/lms-kysely/tsconfig.lib.json",
+        "assets": ["libs/lms-kysely/*.md"]
+      }
+    }
+  }
+}
