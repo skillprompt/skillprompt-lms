@@ -1,12 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unsafe-function-type */
-//------------------- Extend the global ErrorConstructor interface to include captureStackTrace-----------
-declare global {
-  interface ErrorConstructor {
-    captureStackTrace(targetObject: any, constructorOpt?: Function): void;
-  }
-}
-
 export class APIError extends Error {
   status: number;
 

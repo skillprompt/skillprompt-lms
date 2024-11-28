@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import express, { NextFunction, Request, Response } from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
@@ -35,7 +34,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiDocument));
 // ------------------------- CORS Setup -------------------------
 app.use(
   cors({
-    origin: [`${env.FRONTEND_URI}`], // replace with your actual frontend URL
+    origin: ['${env.FRONTEND_URI}'], // replace with your actual frontend URL
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // Support cookies
   })
