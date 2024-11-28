@@ -10,16 +10,30 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2020", "dom"],
+    "lib": [
+      "es2020",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@skillprompt-lms-kysely": ["libs/lms-kysely/src/index.ts"],
-      "@skillprompt-lms/libs/todo-feature": ["libs/todo-feature/src/index.ts"],
-      "@skillprompt-lms/lms-prisma": ["libs/lms-prisma/src/index.ts"],
-      "@api-contract": ["libs/api-contract/src/index.ts"]
+      "@skillprompt-lms-kysely": [
+        "libs/lms-kysely/src/index.ts"
+      ],
+      "@skillprompt-lms/libs/todo-feature": [
+        "libs/todo-feature/src/index.ts"
+      ],
+      "@skillprompt-lms/lms-prisma": [
+        "libs/lms-prisma/src/index.ts"
+      ],
+      "@api-contract": [
+        "libs/api-contract/src/index.ts"
+      ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }
