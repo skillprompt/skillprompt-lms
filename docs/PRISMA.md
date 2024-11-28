@@ -31,7 +31,7 @@ const prisma = new PrismaClient()
 ->Migration system
 ->A tool for managing your database schema migrations.
 
-```TYPESCRIPT
+```ts
 model Profile {
 id Int @id @default(autoincrement())
 bio String?
@@ -104,7 +104,7 @@ creates the .env file in the root directory of the project, which is used for de
 
 To connect your database, you need to set the url field of the datasource block in your Prisma schema to your database Connection URL
 
-```TYPESCRIPT
+```ts
 datasource db {
 provider = "postgresql"
 url = env("DATABASE_URL")
@@ -120,7 +120,7 @@ url = env("DATABASE_URL")
 
 Prisma Migrate is used to create the tables in your database. This data model is added on schema.Prisma file:
 
-```TYPESCRIPT
+```ts
 model Profile {
 id Int @id @default(autoincrement())
 bio String?
@@ -158,7 +158,7 @@ This command invokes prisma generate command which reads Your Prisma Schema and 
 
 **Quering the Database**
 
-```TYPESCRIPT
+```ts
 ``import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
